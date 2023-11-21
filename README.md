@@ -19,6 +19,7 @@ The complexity of the project is evident in the implementation of features such 
 - - - -
 
 ### File Structure ###
+```
 / : represents folder
 -- : represents files
 
@@ -58,17 +59,18 @@ The complexity of the project is evident in the implementation of features such 
     --manage.py - A command-line utility that lets you interact with your Django project in various ways, such as running development servers, creating database tables, and more.
     --README.md - this file
     --requirements.txt - list of libraries needed to run
+```
 
 - - - - 
 
 ### How to run ###
-Download the zip file or Clone the repository using this command in your terminal.
-In your terminal, cd into the capstone directory.
-Run _python manage.py makemigrations threadfusion_ to make migrations for the threadfusion website.
-Run _python manage.py migrate_ to apply migrations to your database.
-Run _python manage.py createsuperuser_ to create a superuser for Django Administration.
-Run _pip install django-quill-editor_ to install Rich Text editor (QuillField). 
-Run _python manage.py runserver_ to start up the Django web server, and visit the website in your browser.
+1. Download the zip file or Clone the repository using this command in your terminal.
+2. In your terminal, cd into the capstone directory.
+3. Run _python manage.py makemigrations threadfusion_ to make migrations for the threadfusion website.
+4. Run _python manage.py migrate_ to apply migrations to your database.
+5. Run _python manage.py createsuperuser_ to create a superuser for Django Administration.
+6. Run _pip install django-quill-editor_ to install Rich Text editor (QuillField). 
+7. Run _python manage.py runserver_ to start up the Django web server, and visit the website in your browser.
 
 ### Features ###
 * __User Authentication__: It ensures a secure and user-friendly experience for users, offering both login and registration functionalities with necessary validation and error handling.Both login and registration forms include CSRF tokens for security. Appropriate redirections are implemented to ensure a smooth user experience. Error messages are displayed when there are issues with authentication or registration. The code includes measures to enforce password complexity and prevent username duplication.
