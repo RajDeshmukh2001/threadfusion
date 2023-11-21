@@ -1,0 +1,51 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    <div class="hero-section">
+        <div class="headline">
+            <h1>Bridging Ideas: Where Conversations Spark Innovation</h1>
+            <p>Your platform for sharing knowledge, experiences, and perspectives.
+                <br>
+                Engage in thought-provoking discussions across various topics.
+            </p>
+            <a href="{% url 'askquestion' %}">Ask Question</a>
+        </div>
+
+        <div class="illustration">
+            <img src="static/threadfusion/forum1.png" alt="Illustration">
+        </div>
+    </div>
+
+    <div class="top-questions">
+        <h4>Top Questions</h4>
+        {% if question_count == 0 %}
+            <p>No Questions. Be the first one to ask the <a href="{% url 'askquestion' %}">Question</a></p>
+        {% endif %}
+
+        {% for questions in all_questions %}
+            <div class="question-box">
+                <a href="{% url 'singlequestion' id=questions.question.id %}">{{ questions.question.title }}</a>
+
+                <div class="answers-date">
+                    <h3 class="answer">
+                        {% if questions.answers_count == 1 %}
+                            {{ questions.answers_count }} &nbsp;Answer
+                        {% else %}
+                            {{ questions.answers_count }} &nbsp;Answers
+                        {% endif %}
+                    </h3>
+                    <ul class="tags">
+                        {% for tag in questions.tags %}
+                            <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <p class="date-posted">asked on {{ questions.question.created_at | date:"j M Y" }} | edited on {{ questions.question.updated_at | date:"j M Y" }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include "threadfusion/footer.html" %}
+{% endblock %}

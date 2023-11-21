@@ -1,0 +1,42 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    {% if alert %}
+        <div class="toast-box">
+            <div class="toast success-toast">
+                <div class="msg-box">
+                    <i class="fa fa-check-circle"></i>
+                    <p>Success! {{ alert }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="/"></i>
+            </div>
+        </div>
+    {% endif %}
+    <h2 class="module-title">Ask a Question</h2>
+    <div class="rules-container">
+        <h2>Forum Rules and Community Guidelines</h2>
+        <div class="rules-guidelines">
+            <ul>
+                <li>Do not use the forum solely for self-promotion or advertising.</li>
+                <li>Check if your question has already been asked and answered before posting.</li>
+                <li>Do not share harmful advice, including self-harm or suicide-related content.</li>
+                <li>Avoid using profanity or offensive language. Do not use hate speech, discrimination, or harassment.</li>
+                <li>Refrain from posting or sharing sensitive personal information, including contact details, without the individual's consent.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question-container">
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+
+            {% if not user.is_authenticated %}
+                <a href="{% url 'login' %}" class="submit-btn">Login to post question</a>
+            {% else %}
+                <input class="submit-btn" type="submit" value="Post your Question">
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

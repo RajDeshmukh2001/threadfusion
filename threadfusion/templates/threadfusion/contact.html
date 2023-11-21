@@ -1,0 +1,52 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    {% if alert %}
+        <div class="toast-box">
+            <div class="toast success-toast">
+                <div class="msg-box">
+                    <i class="fa fa-check-circle"></i>
+                    <p>Success! {{ alert }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="contact"></i>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="register-login-contact responsive-contact">
+        <div class="icons">
+            <div class="icon-box">
+                <img src="static/threadfusion/email.png" alt="email">
+                <a href="#">Email</a>
+            </div>
+            <div class="icon-box">
+                <img src="static/threadfusion/linkedin.png" alt="linkedin">
+                <a href="#">Linkedin</a>
+            </div>
+            <div class="icon-box">
+                <img src="static/threadfusion/twitter.png" alt="twitter">
+                <a href="#">Twitter</a>
+            </div>
+            <div class="icon-box">
+                <img src="static/threadfusion/facebook.png" alt="facebook">
+                <a href="#">Facebook</a>
+            </div>
+            <div class="icon-box last">
+                <img src="static/threadfusion/instagram.png" alt="instagram">
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+
+        <div class="form-container contact-us">
+            <h2>Contact Us</h2>
+
+            <form action="{% url 'contact' %}" method="POST" class="form contact-form">
+                {% csrf_token %}
+                <input type="text" name="fullname" placeholder="Enter your Fullname" required>
+                <input type="email" name="email" placeholder="Enter your Email" value="{{ user.email }}" required>
+                <textarea rows="4" placeholder="Enter Message" name="message" required></textarea>
+                <input class="submit-btn" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+{% endblock %}

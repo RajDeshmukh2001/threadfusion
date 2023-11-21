@@ -1,0 +1,60 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    {% if message %}
+        <div class="toast-box">
+            <div class="toast">
+                <div class="msg-box">
+                    <i class="fa fa-times-circle"></i>
+                    <p>Error! {{ message }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="login"></i>
+            </div>
+        </div>
+    {% endif %}
+    
+    <div class="register-login-contact">
+        <div class="form-illustration">
+            <img src="static/threadfusion/login.png" alt="login">
+            <p>Access your profile and discussions with a click.</p>
+        </div>
+
+        <div class="form-container">
+            <h2>Thread Fusion</h2>
+            <p class="welcome">Welcome to Thread Fusion</p>
+
+            <form action="{% url 'login' %}" method="POST" class="form">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Enter your Username" required>
+                <div class="password">
+                    <input type="password" name="password" placeholder="Enter your Password" id="password" required>
+                    <i class="fa-regular fa-eye" id="open-eye"></i>
+                    <i class="fa-regular fa-eye-slash" id="close-eye"></i>
+                </div>
+                <input class="submit-btn" type="submit" value="Login">
+            </form>
+
+            <p class="redirect-url">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let passwordInput = document.getElementById('password');
+            let open_eye = document.getElementById('open-eye');
+            let close_eye = document.getElementById('close-eye');
+
+            open_eye.onclick = () => {
+                passwordInput.type = 'password';
+                open_eye.style.display = 'none';
+                close_eye.style.display = 'flex';
+            }
+
+            close_eye.onclick = () => {
+                passwordInput.type = 'text';
+                open_eye.style.display = 'flex';
+                close_eye.style.display = 'none';
+            }
+        });
+    </script>
+{% endblock %}

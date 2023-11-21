@@ -1,0 +1,149 @@
+{% extends "threadfusion/navbar.html" %}
+{% load humanize %}
+
+{% block body %}
+    {% if alert %}
+        <div class="toast-box">
+            <div class="toast success-toast">
+                <div class="msg-box">
+                    <i class="fa fa-check-circle"></i>
+                    <p>Success! {{ alert }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="{{ question.id }}"></i>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="delete-popup" id="popup">
+        <div class="popup">
+            <div class="message">
+                <i class="fa-regular fa-circle-xmark"></i>
+                <p>Are you sure? This cannot be undone.</p>
+            </div>
+            <div class="btns">
+                <button class="btn close" onclick="closePopup()">Close</button>
+                <form action="{% url 'deletequestion' question.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="question-id" value="" id="question-id">
+                    <input type="hidden" name="answer-id" value="" id="answer-id">
+                    <input type="submit" value="Delete" class="btn delete">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="singlequestion-container">
+        <div class="question-title">
+            <h2 class="title">{{ question.title }}</h2>
+            {% if user == question.user %}
+                <div class="edit-delete-btns">
+                    <a href="{% url 'editquestion' question.id %}" class="edit-btn">Edit</a>
+                    <button class="delete-btn" onclick="openPopup('{{ question.id }}')">Delete</button>
+                </div>
+            {% endif %}
+        </div>
+        {{ question.description.html | safe }}
+        <div class="user-date-tags">
+            <ul class="tags">
+                {% for tag in tags %}
+                <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="user-with-date">
+                <p class="user-name"><i class='fa fa-user-circle' style="font-size: 20px"></i> {{ question.user }}</p>
+                <p class="asked-on">asked on {{ question.created_at | date:"j M Y" }} | edited on {{ question.updated_at | date:"j M Y" }}</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="allAnswers">
+        <h3 class="answer-count">
+            {% if answers_count == 1 %}
+                {{ answers_count }} &nbsp;Answer
+            {% else %}
+                {{ answers_count }} &nbsp;Answers
+            {% endif %}
+        </h3>
+        {% for ans in all_answers %}
+            <div class="answer-box">
+                <div class="answer-details">
+                    <div class="user-details">
+                        <p class="user-profile"><i class='fa fa-user-circle' style="font-size: 20px"></i>{{ ans.user }}</p>
+                        <p>answered on {{ ans.created_at | date:"j M Y" }} | edited on {{ ans.updated_at | date:"j M Y" }}</p>
+                    </div>
+                    {% if user == ans.user %}
+                        <div class="edit-delete-btns">
+                            <a href="{% url 'editanswer' question.id ans.id %}" class="edit-btn">Edit</a>
+                            <button class="delete-btn" onclick="openPopupAnswer('{{ question.id }}', '{{ ans.id }}')">Delete</button>
+                        </div>
+                    {% endif %}
+                </div>
+                {{ ans.answer.html | safe }}
+            </div>
+
+            <div class="comments-container">
+                <h4>Comments</h4>
+                {% for comment in comments %}
+                    {% if comment.answer.id == ans.id %}
+                        <p class="main-comment">{{ comment.comment }} –&nbsp; <span class="comment-user">{{ comment.user }}</span><span>{{ comment.created_at | timesince }} ago</span></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="comments-form-container">
+                <form class="comments-form" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="answer_id" value="{{ ans.id }}" placeholder="Add a comment">
+                    <input type="text" name="comment" placeholder="Add a comment" autocomplete="off">
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+            <hr>
+        {% endfor %}    
+    </div>
+
+    {% if not user.is_authenticated %}
+        <p class="login-url">To answer this question you need to login here <a href="{% url 'login' %}" class="login-btn"> Login</a></p>
+    {% elif user.is_authenticated and not question.user.id == user.id %}
+        <div class="answer-container">
+            <h3 class="your-answer">Your Answer</h3>
+            <form method="POST" class="form">
+                {% csrf_token %}
+                {{ answerForm.media  }}
+                {{ answerForm.as_p }}
+                
+                <input class="submit-btn" type="submit" value="Post your answer">
+            </form>
+        </div>
+    {% else %}
+        <div class="own-question">
+            <p>Sorry! but you cannot answer your own question.</p>
+            <p>If you have find the solution or possess the answer, kindly update your question to share the solution.</p>
+        </div>
+    {% endif %}
+
+    <script>
+        let popup = document.getElementById("popup");
+
+        const openPopup = (id) => {
+            popup.classList.add("open-popup");
+            document.getElementById("question-id").value = id;
+        }
+        
+        const openPopupAnswer = (question_id, answer_id) => {
+            popup.classList.add("open-popup");
+            document.getElementById("question-id").value = question_id;
+            document.getElementById("answer-id").value = answer_id;
+
+            popup.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+
+        const closePopup = () => {
+            popup.classList.remove("open-popup");
+        } 
+    </script>
+{% endblock %}

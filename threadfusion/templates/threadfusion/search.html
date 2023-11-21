@@ -1,0 +1,35 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    <h2 class="question_count">showing 
+        {% if question_count == 1 %}
+            {{ question_count }} result
+        {% else %}
+            {{ question_count }} results
+        {% endif %} for "{{ query }}"
+    </h2>
+
+    <div class="filtered_questions-container">
+        {% for searched_question in searched_questions %}
+            <div class="filtered_questions">
+                <a href="{% url 'singlequestion' id=searched_question.question.id %}">{{ searched_question.question.title }}</a>
+    
+                <div class="answers-date">
+                    <h3 class="answer">
+                        {% if searched_question.answers_count == 1 %}
+                            {{ searched_question.answers_count }} &nbsp;Answer
+                        {% else %}
+                            {{ searched_question.answers_count }} &nbsp;Answers
+                        {% endif %}
+                    </h3>
+                    <ul class="tags">
+                        {% for tag in searched_question.tags %}
+                            <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <p class="date-posted">asked on {{ searched_question.question.created_at | date:"j M Y" }} | edited on {{ searched_question.question.updated_at | date:"j M Y" }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
