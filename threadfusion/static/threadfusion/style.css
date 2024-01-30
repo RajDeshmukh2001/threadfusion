@@ -1174,6 +1174,10 @@ a {
   .box-container .filtered_questions-container h4 {
     font-size: 16px;
   }
+  .box-container .top-questions .no-questions,
+  .box-container .filtered_questions-container .no-questions {
+    font-size: 13px;
+  }
   .box-container .top-questions .question-box,
   .box-container .top-questions .filtered_questions,
   .box-container .filtered_questions-container .question-box,
