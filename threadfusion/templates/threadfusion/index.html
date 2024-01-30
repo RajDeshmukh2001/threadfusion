@@ -19,7 +19,7 @@
     <div class="top-questions">
         <h4>Top Questions</h4>
         {% if question_count == 0 %}
-            <p>No Questions. Be the first one to ask the <a href="{% url 'askquestion' %}">Question</a></p>
+            <p class="no-questions">No Questions. Be the first one to ask the <a href="{% url 'askquestion' %}">Question</a></p>
         {% endif %}
 
         {% for questions in all_questions %}
