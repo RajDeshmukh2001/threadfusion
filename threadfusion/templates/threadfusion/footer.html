@@ -1,9 +1,14 @@
 <footer class="footer">
-    <p>&copy; 2023 <a href="{% url 'index' %}">ThreadFusion</a> | All rights reserved.</p>
+    <p>&copy; <span class="year"></span> <a href="{% url 'index' %}">ThreadFusion</a> | All rights reserved.</p>
 
-    <div class="socials">
+    {% comment %} <div class="socials">
         Made by Prithviraj Deshmukh. 
         <a href="http://www.linkedin.com/in/prithviraj-deshmukh" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin fa-xl"></i></a>
         <a href="https://github.com/RajDeshmukh2001" target="_blank" rel="noopener"><i class="fa-brands fa-github fa-xl"></i></a>
-    </div>
+    </div> {% endcomment %}
 </footer>
+<script>
+    let year = document.querySelector('.year');
+    let currentYear = new Date().getFullYear();
+    year.textContent = currentYear;
+</script>

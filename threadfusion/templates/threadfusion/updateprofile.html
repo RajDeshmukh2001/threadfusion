@@ -1,0 +1,67 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    {% if alert %}
+        <div class="toast-box">
+            <div class="toast success-toast">
+                <div class="msg-box">
+                    <i class="fa fa-check-circle"></i>
+                    <p>Success! {{ alert }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="http://127.0.0.1:8000/userprofile/{{ user_id }}"></i>
+            </div>
+        </div>
+    {% endif %}
+    <diV class="update-profile-container">
+        <h2>Update Profile</h2>
+        <form method="POST" enctype="multipart/form-data" class="update-profile-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.profile_image.id_for_label }}">{{ form.profile_image.label }}</label>
+                <input type="file" name="profile_image" id="id_profile_image" class="custom-file-input">
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.fullname.id_for_label }}">{{ form.fullname.label }}<span> *</span></label>
+                {{ form.fullname }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.profession.id_for_label }}">{{ form.profession.label }}<span> *</span></label>
+                {{ form.profession }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.linkedin.id_for_label }}">{{ form.linkedin.label }}</label>
+                {{ form.linkedin }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.github.id_for_label }}">{{ form.github.label }}</label>
+                {{ form.github }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.instagram.id_for_label }}">{{ form.instagram.label }}</label>
+                {{ form.instagram }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.facebook.id_for_label }}">{{ form.facebook.label }}</label>
+                {{ form.facebook }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.twitter.id_for_label }}">{{ form.twitter.label }}</label>
+                {{ form.twitter }}
+            </div>
+
+            <div class="form-group about-textarea">
+                <label for="{{ form.about.id_for_label }}">{{ form.about.label }}<span> *</span></label>
+                {{ form.about }}
+            </div>
+
+            <input type="submit" value="Update" class="update-btn">
+        </form>
+    </diV>
+{% endblock %}

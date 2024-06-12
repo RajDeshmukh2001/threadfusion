@@ -2,12 +2,22 @@
 {% load humanize %}
 
 {% block body %}
-    {% if alert %}
+    {% if error_message %}
+        <div class="toast-box">
+            <div class="toast">
+                <div class="msg-box">
+                    <i class="fa fa-times-circle"></i>
+                    <p>{{ error_message }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="{{ question.id }}"></i>
+            </div>
+        </div>
+    {% elif success_message %}
         <div class="toast-box">
             <div class="toast success-toast">
                 <div class="msg-box">
                     <i class="fa fa-check-circle"></i>
-                    <p>Success! {{ alert }}</p>
+                    <p>Success! {{ success_message }}</p>
                 </div>
                 <i class="fa-solid fa-xmark" id="close-toast" data-redirect="{{ question.id }}"></i>
             </div>
@@ -46,16 +56,16 @@
         <div class="user-date-tags">
             <ul class="tags">
                 {% for tag in tags %}
-                <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
+                    <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
                 {% endfor %}
             </ul>
             <div class="user-with-date">
-                <p class="user-name"><i class='fa fa-user-circle' style="font-size: 20px"></i> {{ question.user }}</p>
+                <a href="{% url 'userprofile' question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 20px"></i> {{ question.user }}</a>
                 <p class="asked-on">asked on {{ question.created_at | date:"j M Y" }} | edited on {{ question.updated_at | date:"j M Y" }}</p>
             </div>
         </div>
     </div>
-    <hr>
+    <hr style="margin-left: 7rem; width: calc(100vw - 14rem);">
 
     <div class="allAnswers">
         <h3 class="answer-count">
@@ -69,7 +79,7 @@
             <div class="answer-box">
                 <div class="answer-details">
                     <div class="user-details">
-                        <p class="user-profile"><i class='fa fa-user-circle' style="font-size: 20px"></i>{{ ans.user }}</p>
+                        <a href="{% url 'userprofile' ans.user.id %}" class="user-profile"><i class='fa fa-user-circle' style="font-size: 20px"></i>{{ ans.user }}</a>
                         <p>answered on {{ ans.created_at | date:"j M Y" }} | edited on {{ ans.updated_at | date:"j M Y" }}</p>
                     </div>
                     {% if user == ans.user %}
@@ -80,25 +90,45 @@
                     {% endif %}
                 </div>
                 {{ ans.answer.html | safe }}
+
+                {% if user.is_authenticated %}
+                    <button type="button" class="likes-button like-btn" data-postid="{{ ans.id }}">
+                        {% if ans.id in all_likes %}
+                            <i class="fa-solid fa-thumbs-up liked"></i>
+                            {% else %}
+                            <i class="fa-solid fa-thumbs-up unlike"></i>
+                        {% endif %} 
+                            <span class="number-of-likes">{{ ans.answer_liked.count }}</span>
+                            {% if ans.answer_liked.count <= 1 %}
+                                <span class="like">like</span>
+                            {% else %}
+                                <span class="like">likes</span>
+                            {% endif %}
+                    </button>
+                {% endif %}
             </div>
 
             <div class="comments-container">
                 <h4>Comments</h4>
                 {% for comment in comments %}
                     {% if comment.answer.id == ans.id %}
-                        <p class="main-comment">{{ comment.comment }} –&nbsp; <span class="comment-user">{{ comment.user }}</span><span>{{ comment.created_at | timesince }} ago</span></p>
+                        <p class="main-comment">{{ comment.comment }} –&nbsp; <a href="{% url 'userprofile' comment.user.id %}" class="comment-user">{{ comment.user }}</a><span>{{ comment.created_at | timesince }} ago</span></p>
                     {% endif %}
                 {% endfor %}
             </div>
 
-            <div class="comments-form-container">
-                <form class="comments-form" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="answer_id" value="{{ ans.id }}" placeholder="Add a comment">
-                    <input type="text" name="comment" placeholder="Add a comment" autocomplete="off">
-                    <button type="submit">Add</button>
-                </form>
-            </div>
+            {% if not user.is_authenticated %}
+                <p class="login-to-comment"><a href="{% url 'login' %}" class="login-btn"> Login</a> to add a comment</p>
+            {% else %}
+                <div class="comments-form-container">
+                    <form class="comments-form" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="answer_id" value="{{ ans.id }}" placeholder="Add a comment">
+                        <input type="text" name="comment" placeholder="Add a comment" autocomplete="off">
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            {% endif %}
             <hr>
         {% endfor %}    
     </div>
@@ -145,5 +175,53 @@
         const closePopup = () => {
             popup.classList.remove("open-popup");
         } 
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const like_button = document.querySelectorAll('.like-btn');
+        
+            like_button.forEach(button => {
+                button.onclick = () => {
+                    if (button.classList.contains('likes-button')) {
+                        like(button);
+                    }
+                };
+            });
+        });
+
+        const like = (button) => {
+            let answer_id = button.dataset.postid;
+        
+            fetch('/like', {
+                method: 'PUT',
+                body: JSON.stringify({ answer_id, action: 'like' })
+            }).then(response => {
+                if (response.status == 201) {
+                    changeLikeContent(button, true);
+                } else if (response.status == 200) {
+                    changeLikeContent(button, false);
+                }
+                return response.json();
+            })
+        }
+        
+        const changeLikeContent = (button, action) => {
+            let span = button.querySelector('i');
+            let likes = button.getElementsByClassName('number-of-likes')[0];
+            let numberOfLikes = parseInt(likes.innerText);
+            if (action) {
+                span.classList.add('liked');
+                span.classList.remove('unlike');
+                numberOfLikes++;
+            } else {
+                span.classList.add('unlike');
+                span.classList.remove('liked');
+                numberOfLikes--;
+            }
+            if (numberOfLikes <= 1){
+                likes.innerText = numberOfLikes;
+            } else {
+                likes.innerText = numberOfLikes;
+            }
+        }
     </script>
 {% endblock %}

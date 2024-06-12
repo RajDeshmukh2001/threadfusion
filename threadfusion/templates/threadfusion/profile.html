@@ -1,0 +1,90 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    <div class="profile-container">
+        <div class="user-profile-info">
+            <div class="user-info">
+                <div class="user-img">
+                    {% if profile.profile_image %}
+                        <img src="{{ profile.profile_image.url }}" alt="Profile_Image" >
+                    {% else %}
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user">
+                    {% endif %}
+                </div>
+                <div class="user-name">
+                    {% if profile.fullname %}
+                        <h2>{{ profile.fullname }}</h2>
+                    {% else %}
+                        <h2>{{ profile_user }}</h2>
+                    {% endif %}
+                    <p>{{ profile.profession }}</p>
+                </div>
+                <div class="followes-following">
+                    <p>Followers - <span>{{ followers.count }}</span></p>
+                    <p>Following - <span>{{ following.count }}</span></p>
+                </div>
+                <div class="actions">
+                    {% if user.is_authenticated %}
+                        {% if user == profile_user %}
+                            <a href="{% url 'updateprofile' user.id %}">Update Profile</a>
+                        {% else %}
+                            {% if isFollowing %}
+                                <form action="{% url 'unfollow' %}" method="POST" class="follow-unfollow-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="profileUser" value="{{ profile_user }}">
+                                    <input type="submit" value="Unfollow" class="follow-unfollow">
+                                </form>
+                            {% else %}
+                                <form action="{% url 'follow' %}" method="POST" class="follow-unfollow-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="profileUser" value="{{ profile_user }}">
+                                    <input type="submit" value="Follow" class="follow-unfollow">
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="about">
+                <div class="about-me">
+                    <h3>About Me</h3>
+                    <p>{{ profile.about }}</p>
+                </div>
+
+                <div class="social-links">
+                    {% if profile.linkedin %}
+                        <a href="{{ profile.linkedin }}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if profile.github %}
+                        <a href="{{ profile.github }}" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    {% endif %}
+                    {% if profile.instagram %}
+                        <a href="{{ profile.instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    {% endif %}
+                    {% if profile.facebook %}
+                        <a href="{{ profile.facebook }}" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    {% endif %}
+                    {% if profile.twitter %}
+                        <a href="{{ profile.twitter }}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="user-assets">
+            <div class="assets">
+                <a href="{% url 'userassets' id=profile_user.id asset='questions' %}">Questions</a>
+                <p>{{ questions.count }}</p>
+            </div>
+            <div class="assets">
+                <a href="{% url 'userassets' id=profile_user.id asset='answers' %}">Answers</a>
+                <p>{{ answers.count }}</p>
+            </div>
+            <div class="assets">
+                <a href="{% url 'userassets' id=profile_user.id asset='comments' %}">Comments</a>
+                <p>{{ comments.count }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

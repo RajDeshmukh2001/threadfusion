@@ -1,0 +1,130 @@
+{% extends "threadfusion/navbar.html" %}
+
+{% block body %}
+    <div class="filtered_questions-container">
+        {% if asset == 'questions' %}
+            <h2 class="module-title">Questions posted by {{ user }}</h2>
+            {% for user_question in user_questions %}
+                <div class="filtered_questions">
+                    <a href="{% url 'singlequestion' id=user_question.question.id %}" class="title">{{ user_question.question.title }}</a>
+                    {{ user_question.question.description.html | safe }}
+
+                    <div class="answers-date">
+                        <h3 class="answer_count">
+                            {% if user_question.answers_count == 1 %}
+                                {{ user_question.answers_count }} &nbsp;Answer
+                            {% else %}
+                                {{ user_question.answers_count }} &nbsp;Answers
+                            {% endif %}
+                        </h3>
+                        <ul class="tags">
+                            {% for tag in user_question.tags %}
+                                <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="question-by">
+                            <a href="{% url 'userprofile' user_question.question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ user_question.question.user }}</a>
+                            <p class="date-posted">asked {{ user_question.question.created_at | date:"j M Y" }} | edited {{ user_question.question.updated_at | date:"j M Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        {% elif asset == 'answers'  %}
+            <h2 class="module-title">Answers posted by {{ user }}</h2>
+            {% for user_answer in user_answers %}
+                <div class="filtered_questions">
+                    <a href="{% url 'singlequestion' id=user_answer.question.id %}" class="title">
+                        <svg aria-hidden="true" class="svg-icon iconQuestion" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="m4 15-3 3V4c0-1.1.9-2 2-2h12c1.09 0 2 .91 2 2v9c0 1.09-.91 2-2 2H4Zm7.75-3.97c.72-.83.98-1.86.98-2.94 0-1.65-.7-3.22-2.3-3.83a4.41 4.41 0 0 0-3.02 0 3.8 3.8 0 0 0-2.32 3.83c0 1.29.35 2.29 1.03 3a3.8 3.8 0 0 0 2.85 1.07c.62 0 1.2-.11 1.71-.34.65.44 1 .68 1.06.7.23.13.46.23.7.3l.59-1.13a5.2 5.2 0 0 1-1.28-.66Zm-1.27-.9a5.4 5.4 0 0 0-1.5-.8l-.45.9c.33.12.66.29.98.5-.2.07-.42.11-.65.11-.61 0-1.12-.23-1.52-.68-.86-1-.86-3.12 0-4.11.8-.9 2.35-.9 3.15 0 .9 1.01.86 3.03-.01 4.08Z"></path>
+                        </svg>
+                        {{ user_answer.question.title }}
+                    </a>
+                    {{ user_answer.question.description.html | safe }}
+
+                    <div class="question-owner">
+                        <a href="{% url 'userprofile' user_answer.question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ user_answer.question.user }}</a>
+                        <p class="date-posted">asked {{ user_answer.question.created_at | date:"j M Y" }} | edited {{ user_answer.question.updated_at | date:"j M Y" }}</p>
+                    </div>
+                </div>
+                <div class="connect">
+                    <div class="connector"></div>
+                </div>
+                <div class="answer">
+                    {{ user_answer.answer.answer.html | safe }}
+
+                    <div class="answer-date">
+                        <p class="date-posted">asked {{ user_answer.answer.created_at | date:"j M Y" }} | edited {{ user_answer.answer.updated_at | date:"j M Y" }}</p>
+                    </div>
+                </div>
+                <hr class="hr-2">
+            {% endfor %}
+
+        {% elif asset == 'comments'  %}
+            <h2 class="module-title">Comments posted by {{ user }}</h2>
+            {% for user_comment in user_comments %}
+                <div class="filtered_questions">
+                    <a href="{% url 'singlequestion' id=user_comment.question.id %}" class="title">
+                        <svg aria-hidden="true" class="svg-icon iconQuestion" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="m4 15-3 3V4c0-1.1.9-2 2-2h12c1.09 0 2 .91 2 2v9c0 1.09-.91 2-2 2H4Zm7.75-3.97c.72-.83.98-1.86.98-2.94 0-1.65-.7-3.22-2.3-3.83a4.41 4.41 0 0 0-3.02 0 3.8 3.8 0 0 0-2.32 3.83c0 1.29.35 2.29 1.03 3a3.8 3.8 0 0 0 2.85 1.07c.62 0 1.2-.11 1.71-.34.65.44 1 .68 1.06.7.23.13.46.23.7.3l.59-1.13a5.2 5.2 0 0 1-1.28-.66Zm-1.27-.9a5.4 5.4 0 0 0-1.5-.8l-.45.9c.33.12.66.29.98.5-.2.07-.42.11-.65.11-.61 0-1.12-.23-1.52-.68-.86-1-.86-3.12 0-4.11.8-.9 2.35-.9 3.15 0 .9 1.01.86 3.03-.01 4.08Z"></path>
+                        </svg>
+                        {{ user_comment.question.title }}
+                    </a>
+                    {{ user_comment.question.description.html | safe }}
+
+                    <div class="question-owner">
+                        <a href="{% url 'userprofile' user_comment.question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ user_comment.question.user }}</a>
+                        <p class="date-posted">asked {{ user_comment.question.created_at | date:"j M Y" }} | edited {{ user_comment.question.updated_at | date:"j M Y" }}</p>
+                    </div>
+                </div>
+                <div class="connect">
+                    <div class="connector"></div>
+                </div>
+                <div class="answer">
+                    {{ user_comment.answer.answer.html | safe }}
+
+                    <div class="answer-date">
+                        <a href="{% url 'userprofile' user_comment.answer.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ user_comment.answer.user }}</a>
+                        <p class="date-posted">asked {{ user_comment.answer.created_at | date:"j M Y" }} | edited {{ user_comment.answer.updated_at | date:"j M Y" }}</p>
+                    </div>
+                </div>
+                <div class="connect-second">
+                    <div class="connector-second"></div>
+                </div>
+                <div class="user_comment">
+                    <p>{{ user_comment.comment.comment }}</p>
+
+                    <div class="answer-date">
+                        <p class="date-posted">{{ user_comment.comment.created_at | timesince }} ago</p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        {% endif %}
+
+        <div class="pagination">
+            <ul class="pages">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% else %}
+                    <li><span class="disabled">Previous</span></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li><span class="active">{{ num }}</span></li>
+                    {% else %}
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% else %}
+                    <li><span class="disabled">Next</span></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,14 +1,15 @@
 {% extends "threadfusion/navbar.html" %}
 
 {% block body %}
-    <h2 class="module-title">#{{ tag }}</h2>
     <div class="filtered_questions-container">
+        <h2 class="module-title">#{{ tag }}</h2>
         {% for filter_question in filtered_questions %}
             <div class="filtered_questions">
-                <a href="{% url 'singlequestion' id=filter_question.question.id %}">{{ filter_question.question.title }}</a>
-    
+                <a href="{% url 'singlequestion' id=filter_question.question.id %}" class="title">{{ filter_question.question.title }}</a>
+                {{ filter_question.question.description.html | safe }}
+
                 <div class="answers-date">
-                    <h3 class="answer">
+                    <h3 class="answer_count">
                         {% if filter_question.answers_count == 1 %}
                             {{ filter_question.answers_count }} &nbsp;Answer
                         {% else %}
@@ -20,9 +21,37 @@
                             <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
                         {% endfor %}
                     </ul>
-                    <p class="date-posted">asked on {{ filter_question.question.created_at | date:"j M Y" }} | edited on {{ filter_question.question.updated_at | date:"j M Y" }}</p>
+
+                    <div class="question-by">
+                        <a href="{% url 'userprofile' filter_question.question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ filter_question.question.user }}</a>
+                        <p class="date-posted">asked {{ filter_question.question.created_at | date:"j M Y" }} | edited {{ filter_question.question.updated_at | date:"j M Y" }}</p>
+                    </div>
                 </div>
             </div>
         {% endfor %}
+
+        <div class="pagination">
+            <ul class="pages">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% else %}
+                    <li><span class="disabled">Previous</span></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li><span class="active">{{ num }}</span></li>
+                    {% else %}
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% else %}
+                    <li><span class="disabled">Next</span></li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

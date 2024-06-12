@@ -11,6 +11,16 @@
                 <i class="fa-solid fa-xmark" id="close-toast" data-redirect="login"></i>
             </div>
         </div>
+    {% elif alert %}
+        <div class="toast-box">
+            <div class="toast success-toast">
+                <div class="msg-box">
+                    <i class="fa fa-check-circle"></i>
+                    <p>Success! {{ alert }}</p>
+                </div>
+                <i class="fa-solid fa-xmark" id="close-toast" data-redirect="index"></i>
+            </div>
+        </div>
     {% endif %}
     
     <div class="register-login-contact">
@@ -30,6 +40,9 @@
                     <input type="password" name="password" placeholder="Enter your Password" id="password" required>
                     <i class="fa-regular fa-eye" id="open-eye"></i>
                     <i class="fa-regular fa-eye-slash" id="close-eye"></i>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forgot Password</a>
                 </div>
                 <input class="submit-btn" type="submit" value="Login">
             </form>

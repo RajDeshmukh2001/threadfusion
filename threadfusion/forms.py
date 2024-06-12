@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question, Answer
+from .models import Question, Answer, Profile
 
 class AskQuestionForm(forms.ModelForm):
    class Meta:
@@ -23,3 +23,16 @@ class AnswerForm(forms.ModelForm):
    class Meta:
       model = Answer
       fields = ['answer']
+
+class ProfileForm(forms.ModelForm):
+   profile_image = forms.ImageField(label='Upload Image', required=False, widget=forms.ClearableFileInput(attrs={'class': 'custom-file-input'}))
+   fullname = forms.CharField(label='Fullname', widget=forms.TextInput(attrs={'class': 'input-field'}))
+   profession = forms.CharField(label='Profession', widget=forms.TextInput(attrs={'class': 'input-field'}))
+   linkedin = forms.CharField(label='Linkedin Profile Link', required=False, widget=forms.TextInput(attrs={'class': 'input-field'}))
+   github = forms.CharField(label='Github Profile Link', required=False, widget=forms.TextInput(attrs={'class': 'input-field'}))
+   instagram = forms.CharField(label='Instagram Profile Link', required=False, widget=forms.TextInput(attrs={'class': 'input-field'}))
+   facebook = forms.CharField(label='Facebook Profile Link', required=False, widget=forms.TextInput(attrs={'class': 'input-field'}))
+   twitter = forms.CharField(label='Twitter Profile Link', required=False, widget=forms.TextInput(attrs={'class': 'input-field'}))
+   class Meta:
+      model = Profile
+      fields = ['profile_image', 'fullname', 'profession', 'about', 'linkedin', 'github', 'instagram', 'facebook', 'twitter']

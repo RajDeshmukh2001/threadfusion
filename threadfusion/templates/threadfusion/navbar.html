@@ -28,14 +28,30 @@
                 <li><a href="{% url 'contact' %}"><i class="fa-solid fa-square-phone" id="mobile-icon"></i>Contact</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket" id="mobile-icon"></i>Logout</a></li>
-                    <li><a href="#"><i class='fa fa-user-circle' style="font-size: 20px;"></i> {{ user.username }}</a></li>
+                    {% if profile_img %}
+                        <li class="user-profile-tag">
+                            <a href="{% url 'userprofile' user.id %}">
+                                <div class="image-box">
+                                    <img src="{{ profile_img.profile_image.url }}" alt="Profile_Image" class="profile-image" >
+                                    <span>{{ user.username }}</span>
+                                </div> 
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'userprofile' user.id %}">
+                                <i class='fa fa-user-circle' style="font-size: 20px;"></i>
+                                {{ user.username }}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% else %}
                     <li><a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket" id="mobile-icon"></i>Login</a></li>
                 {% endif %}
             </ul>
 
             <form action="{% url 'search' %}" method="GET" class="search-box search-form">
-                <input type="text" class="search-input" name="q" placeholder="Search...">
+                <input type="text" class="search-input" name="q" placeholder="Search..." required>
                 <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
             </form>
         </div>
