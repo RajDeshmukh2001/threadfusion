@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django_dump_load_utf8',
 ]
 
 MIDDLEWARE = [
@@ -79,11 +81,19 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse('postgres://threadfusion_user:gubUp9cKeuOhY1bpL4tuUYn5KvsZ2z4W@dpg-cpkn38kf7o1s73cs9fp0-a.singapore-postgres.render.com/threadfusion')
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'threadfusion',
+#         'USER': 'postgres',
+#         'PASSWORD': 'rajdd2001',
+#         'PORT': '5432',
+#         'HOST': 'localhost',
+#     }
+# }
 
 AUTH_USER_MODEL = 'threadfusion.User'
 
