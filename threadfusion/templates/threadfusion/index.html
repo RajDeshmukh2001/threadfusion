@@ -17,58 +17,62 @@
     </div>
 
     <div class="top-questions">
-        <h4>Top Questions</h4>
+        {% if all_questions.count == 0 %}
+            <p class="no-questions">No Questions. Be the first one to ask a <a href="{% url 'askquestion' %}">Question</a></p>
+        {% else %}
+            <h4>Top Questions</h4>
 
-        {% for ques in questions %}
-            <div class="question-box">
-                <a href="{% url 'singlequestion' id=ques.question.id %}" class="title">{{ ques.question.title }}</a>
-                {{ ques.question.description.html | safe }}
+            {% for ques in questions %}
+                <div class="question-box">
+                    <a href="{% url 'singlequestion' id=ques.question.id %}" class="title">{{ ques.question.title }}</a>
+                    {{ ques.question.description.html | safe }}
 
-                <div class="answers-date">
-                    <h3 class="answer_count">
-                        {% if ques.answers_count == 1 %}
-                            {{ ques.answers_count }} &nbsp;Answer
-                        {% else %}
-                            {{ ques.answers_count }} &nbsp;Answers
-                        {% endif %}
-                    </h3>
-                    <ul class="tags">
-                        {% for tag in ques.tags %}
-                            <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
-                        {% endfor %}
-                    </ul>
+                    <div class="answers-date">
+                        <h3 class="answer_count">
+                            {% if ques.answers_count == 1 %}
+                                {{ ques.answers_count }} &nbsp;Answer
+                            {% else %}
+                                {{ ques.answers_count }} &nbsp;Answers
+                            {% endif %}
+                        </h3>
+                        <ul class="tags">
+                            {% for tag in ques.tags %}
+                                <li><a href="{% url 'tags' tag=tag %}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
 
-                    <div class="question-by">
-                        <a href="{% url 'userprofile' ques.question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ ques.question.user }}</a>
-                        <p class="date-posted">asked {{ ques.question.created_at | date:"j M Y" }} | edited {{ques.question.updated_at | date:"j M Y" }}</p>
+                        <div class="question-by">
+                            <a href="{% url 'userprofile' ques.question.user.id %}" class="user-name"><i class='fa fa-user-circle' style="font-size: 14px"></i> {{ ques.question.user }}</a>
+                            <p class="date-posted">asked {{ ques.question.created_at | date:"j M Y" }} | edited {{ques.question.updated_at | date:"j M Y" }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
 
-        <div class="pagination">
-            <ul class="pages">
-                {% if page_obj.has_previous %}
-                    <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-                {% else %}
-                    <li><span class="disabled">Previous</span></li>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <li><span class="active">{{ num }}</span></li>
+            <div class="pagination">
+                <ul class="pages">
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
                     {% else %}
-                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                        <li><span class="disabled">Previous</span></li>
                     {% endif %}
-                {% endfor %}
 
-                {% if page_obj.has_next %}
-                    <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
-                {% else %}
-                    <li><span class="disabled">Next</span></li>
-                {% endif %}
-            </ul>
-        </div>
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li><span class="active">{{ num }}</span></li>
+                        {% else %}
+                            <li><a href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    {% else %}
+                        <li><span class="disabled">Next</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 

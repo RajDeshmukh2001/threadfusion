@@ -33,6 +33,7 @@ def index(request):
             'answers_count': answers_count,
         })
     return render(request, "threadfusion/index.html", {
+        "all_questions": all_questions,
         "questions": questions,
         "page_obj": page_obj,
     })
@@ -259,6 +260,7 @@ def tags(request, tag):
 
     return render(request, "threadfusion/tags.html", {
         "tag": tag,
+        "question_count": filtered_questions,
         "filtered_questions": questions,
         "page_obj": page_obj,
     })
