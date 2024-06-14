@@ -28,15 +28,13 @@ a {
     text-decoration: none;
 }
 
-div.form-row {
-    div.django-quill-widget-container {
-        display: inline-block;
-    }
+div.django-quill-widget-container {
+    display: inline-block;
 }
 
 .quill-editor {
     iframe,
-    video{
+    video {
         pointer-events: none;
     }
 }
