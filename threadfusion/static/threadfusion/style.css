@@ -26,6 +26,23 @@ a {
   text-decoration: none;
 }
 
+div.form-row div.django-quill-widget-container {
+  display: inline-block;
+}
+
+.quill-editor iframe,
+.quill-editor video {
+  pointer-events: none;
+}
+
+button.ytp-large-play-button {
+  pointer-events: none;
+}
+
+button.ytp-button {
+  pointer-events: none;
+}
+
 .navbar-menu {
   position: sticky;
   top: 0;

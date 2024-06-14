@@ -28,6 +28,27 @@ a {
     text-decoration: none;
 }
 
+div.form-row {
+    div.django-quill-widget-container {
+        display: inline-block;
+    }
+}
+
+.quill-editor {
+    iframe,
+    video{
+        pointer-events: none;
+    }
+}
+
+button.ytp-large-play-button {
+    pointer-events: none;
+}
+
+button.ytp-button {
+    pointer-events: none;
+}
+
 // Navigation Menu
 .navbar-menu {
     position: sticky;
@@ -1777,7 +1798,7 @@ a {
             color: #0077B5;
             font-size: 20px;
         }
-            
+
         .fa-github {
             color: #000;
             transition: 0.5s ease-in-out;
@@ -1845,7 +1866,7 @@ a {
 
                 .user-profile-tag {
                     padding-left: 10px;
-    
+
                     .image-box {
                         display: flex;
                         align-items: center;
@@ -1858,16 +1879,16 @@ a {
                             display: flex;
                             text-transform: capitalize;
                         }
-    
+
                         &:hover {
                             border: 1.5px solid #4D774E;
                         }
                     }
-    
+
                     &:hover {
                         cursor: pointer;
                         border: none;
-    
+
                         a {
                             color: unset;
                         }
@@ -2130,15 +2151,15 @@ a {
                 margin-top: -5px;
                 padding: 1.4rem;
                 gap: 10px;
-    
+
                 p {
                     font-size: 12px;
                     text-align: justify;
                 }
-    
+
                 .answer-date {
                     margin-top: 4px;
-    
+
                     .date-posted {
                         font-size: 11px;
                     }
@@ -2939,7 +2960,7 @@ a {
                 color: #0077B5;
                 font-size: 15px;
             }
-                
+
             .fa-github {
                 font-size: 15px;
                 color: #000;
