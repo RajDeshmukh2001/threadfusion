@@ -260,7 +260,6 @@ def tags(request, tag):
 
     return render(request, "threadfusion/tags.html", {
         "tag": tag,
-        "question_count": filtered_questions,
         "filtered_questions": questions,
         "page_obj": page_obj,
     })

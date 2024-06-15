@@ -3,7 +3,7 @@
 {% block body %}
     <div class="filtered_questions-container">
         {% if asset == 'questions' %}
-            <h2 class="module-title">Questions posted by {{ user }}</h2>
+            <h2 class="module-title">Questions posted by <span>"{{ user }}"</span></h2>
             {% for user_question in user_questions %}
                 <div class="filtered_questions">
                     <a href="{% url 'singlequestion' id=user_question.question.id %}" class="title">{{ user_question.question.title }}</a>
@@ -32,7 +32,7 @@
             {% endfor %}
 
         {% elif asset == 'answers'  %}
-            <h2 class="module-title">Answers posted by {{ user }}</h2>
+            <h2 class="module-title">Answers posted by <span>"{{ user }}"</span></h2>
             {% for user_answer in user_answers %}
                 <div class="filtered_questions">
                     <a href="{% url 'singlequestion' id=user_answer.question.id %}" class="title">
@@ -62,7 +62,7 @@
             {% endfor %}
 
         {% elif asset == 'comments'  %}
-            <h2 class="module-title">Comments posted by {{ user }}</h2>
+            <h2 class="module-title">Comments posted by <span>"{{ user }}"</span></h2>
             {% for user_comment in user_comments %}
                 <div class="filtered_questions">
                     <a href="{% url 'singlequestion' id=user_comment.question.id %}" class="title">
