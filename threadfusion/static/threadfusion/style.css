@@ -293,8 +293,8 @@ button.ytp-button {
 .box-container .filtered_questions-container .question-box .title,
 .box-container .filtered_questions-container .filtered_questions .title {
   font-size: 17px;
-  font-weight: 500;
-  color: black;
+  font-weight: 600;
+  color: #4D774E;
   transition: 0.5s ease-in-out;
   display: flex;
   align-items: center;
@@ -326,9 +326,9 @@ button.ytp-button {
 .box-container .top-questions .filtered_questions p:nth-of-type(1),
 .box-container .filtered_questions-container .question-box p:nth-of-type(1),
 .box-container .filtered_questions-container .filtered_questions p:nth-of-type(1) {
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.3px;
-  margin-top: 4px;
+  margin-top: 8px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -380,7 +380,7 @@ button.ytp-button {
 .box-container .filtered_questions-container .question-box .answers-date .tags li a,
 .box-container .filtered_questions-container .filtered_questions .answers-date .tags li a {
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 600;
   color: #39603D;
   padding: 4px 10px;
 }
@@ -1837,11 +1837,7 @@ button.ytp-button {
   .box-container .filtered_questions-container .filtered_questions p:nth-of-type(1) {
     font-size: 14px;
     letter-spacing: 0.3px;
-    margin-top: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin-top: 8px;
   }
   .box-container .top-questions .question-box .answers-date,
   .box-container .top-questions .filtered_questions .answers-date,
@@ -1867,7 +1863,7 @@ button.ytp-button {
   .box-container .filtered_questions-container .question-box .answers-date .tags,
   .box-container .filtered_questions-container .filtered_questions .answers-date .tags {
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 10px 6px;
   }
   .box-container .top-questions .question-box .answers-date .tags li,
   .box-container .top-questions .filtered_questions .answers-date .tags li,
@@ -1915,10 +1911,10 @@ button.ytp-button {
   .box-container .top-questions .filtered_questions .question-owner,
   .box-container .filtered_questions-container .question-box .question-owner,
   .box-container .filtered_questions-container .filtered_questions .question-owner {
-    margin-top: 8px;
-    align-items: flex-start;
+    margin-top: 10px;
+    align-items: center;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 10px;
   }
   .box-container .top-questions .question-box .question-owner .user-name,
   .box-container .top-questions .filtered_questions .question-owner .user-name,
@@ -1931,6 +1927,7 @@ button.ytp-button {
   .box-container .filtered_questions-container .question-box .question-owner .date-posted,
   .box-container .filtered_questions-container .filtered_questions .question-owner .date-posted {
     font-size: 11px;
+    color: #636b74;
   }
   .box-container .top-questions .connect .connector,
   .box-container .top-questions .connect .connector-second,
@@ -2052,16 +2049,16 @@ button.ytp-button {
     gap: 10px;
   }
   .box-container .toast-box .toast .msg-box .fa-times-circle {
-    font-size: 15px;
+    font-size: 18px;
   }
   .box-container .toast-box .toast .msg-box .fa-check-circle {
-    font-size: 15px;
+    font-size: 18px;
   }
   .box-container .toast-box .toast .msg-box p {
-    font-size: 12px;
+    font-size: 13.5px;
   }
   .box-container .toast-box .toast .fa-solid {
-    font-size: 15px;
+    font-size: 18px;
   }
   .box-container .toast-box .success-toast::before {
     background-color: #2BDE3F;
@@ -2139,7 +2136,7 @@ button.ytp-button {
     border: 1px solid #9DC88D;
   }
   .box-container .register-login-contact .form-container h2 {
-    font-size: 15px;
+    font-size: 16px;
   }
   .box-container .register-login-contact .form-container .welcome {
     font-size: 13px;
@@ -2153,7 +2150,7 @@ button.ytp-button {
   }
   .box-container .register-login-contact .form-container .form input,
   .box-container .register-login-contact .form-container .form textarea {
-    font-size: 13px;
+    font-size: 15px;
   }
   .box-container .register-login-contact .form-container .form .password i {
     font-size: 10px;
@@ -2166,6 +2163,7 @@ button.ytp-button {
     letter-spacing: 0.2px;
   }
   .box-container .register-login-contact .form-container .form .submit-btn {
+    width: 100%;
     padding: 10px;
     font-size: 15px;
     font-weight: 400;
@@ -2176,7 +2174,7 @@ button.ytp-button {
   }
   .box-container .register-login-contact .form-container .contact-form input,
   .box-container .register-login-contact .form-container .contact-form textarea {
-    font-size: 13px;
+    font-size: 15px;
   }
   .box-container .register-login-contact .form-container .redirect-url {
     font-size: 13.5px;
@@ -2527,7 +2525,7 @@ button.ytp-button {
   .box-container .profile-container .user-profile-info .user-info .actions a,
   .box-container .profile-container .user-profile-info .user-info .actions .follow-unfollow {
     font-size: 15px;
-    padding: 6px 12px;
+    padding: 10px 12px;
     border: 1.5px solid #39603D;
   }
   .box-container .profile-container .user-profile-info .user-info .actions a:hover,
@@ -2543,7 +2541,7 @@ button.ytp-button {
     font-size: 14px;
   }
   .box-container .profile-container .user-profile-info .about .about-me p {
-    font-size: 13px;
+    font-size: 14px;
     text-align: start;
     letter-spacing: 0.3px;
     line-height: 1.5;
@@ -2621,15 +2619,14 @@ button.ytp-button {
     font-size: 12px;
   }
   .footer {
-    margin-top: 2rem;
     padding: 15px;
     gap: 10px;
   }
   .footer p {
-    font-size: 12px;
+    font-size: 13.5px;
   }
   .footer .socials {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
   }
   .footer .socials .fa-linkedin {

@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="filtered_questions-container">
-        <h2 class="module-title">#{{ tag }}</h2>
+        <h2 class="module-title" style="color: #4D774E; font-weight: 600">#{{ tag }}</h2>
         {% for filter_question in filtered_questions %}
             <div class="filtered_questions">
                 <a href="{% url 'singlequestion' id=filter_question.question.id %}" class="title">{{ filter_question.question.title }}</a>
