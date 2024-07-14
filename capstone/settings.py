@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://threadfusion_user:gubUp9cKeuOhY1bpL4tuUYn5KvsZ2z4W@dpg-cpkn38kf7o1s73cs9fp0-a.singapore-postgres.render.com/threadfusion')
+    'default': dj_database_url.parse('postgresql://threadfusion_17kn_user:u00TVBGe3HPkKH1d8U29CRue6HPB3i97@dpg-cqa061iju9rs73bbrud0-a.singapore-postgres.render.com/threadfusion_17kn')
 }
 
 # DATABASES = {
