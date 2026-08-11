@@ -440,6 +440,15 @@ button.ytp-button {
             }
         }
 
+        .no-data {
+            width: 30%;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        }
+
         .connect,
         .connect-second {
             position: relative;
@@ -1500,7 +1509,7 @@ button.ytp-button {
                 gap: 15px;
                 padding: 20px 25px;
                 border-radius: 10px;
-                box-shadow: 1px 3px 19px -8px rgba(78, 78, 78, 0.28);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 45px -15px, rgba(0, 0, 0, 0.05) 0px 4px 6px 3px;
 
                 .user-img {
                     width: 120px;
@@ -1593,7 +1602,7 @@ button.ytp-button {
                 justify-content: space-between;
                 padding: 20px 25px;
                 border-radius: 10px;
-                box-shadow: 1px 3px 19px -8px rgba(78, 78, 78, 0.28);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 45px -15px, rgba(0, 0, 0, 0.05) 0px 4px 6px 3px;
 
                 .about-me {
                     h3 {
@@ -1641,7 +1650,7 @@ button.ytp-button {
             .assets {
                 width: 100%;
                 border-radius: 10px;
-                box-shadow: 1px 3px 19px -8px rgba(78, 78, 78, 0.28);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 45px -15px, rgba(0, 0, 0, 0.05) 0px 4px 6px 3px;
                 padding: 30px;
                 display: flex;
                 align-items: center;
@@ -2095,6 +2104,13 @@ button.ytp-button {
                         color: #636b74
                     }
                 }
+            }
+
+            .no-data {
+                width: 100%;
+                padding: 20px 0;
+                font-size: 14px;
+                margin-top: 15px;
             }
 
             .connect,

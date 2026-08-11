@@ -17,7 +17,7 @@ from .models import User, Question, Answer, Comment, Profile, Follow, Like, Cont
 def index(request):
     all_questions = Question.objects.all().order_by('id').reverse()
 
-    paginator = Paginator(all_questions, 5)
+    paginator = Paginator(all_questions, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

@@ -183,7 +183,7 @@ button.ytp-button {
 .navbar-menu .main-menu .search-box .search-btn .fa-search {
   font-size: 18px;
 }
-.navbar-menu .main-menu .search-input:not(:-moz-placeholder-shown) {
+.navbar-menu .main-menu .search-input:not(:-moz-placeholder) {
   width: 240px;
   padding: 0 10px;
 }
@@ -196,7 +196,7 @@ button.ytp-button {
   width: 240px;
   padding: 0 10px;
 }
-.navbar-menu .main-menu .search-input:not(:-moz-placeholder-shown) + .search-btn {
+.navbar-menu .main-menu .search-input:not(:-moz-placeholder) + .search-btn {
   color: #fff;
   background: #4D774E;
 }
@@ -452,6 +452,15 @@ button.ytp-button {
   margin: 0;
   font-size: 13px;
   color: #636b74;
+}
+.box-container .top-questions .no-data,
+.box-container .filtered_questions-container .no-data {
+  width: 30%;
+  padding: 30px 0;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 .box-container .top-questions .connect,
 .box-container .top-questions .connect-second,
@@ -1372,7 +1381,7 @@ button.ytp-button {
   gap: 15px;
   padding: 20px 25px;
   border-radius: 10px;
-  box-shadow: 1px 3px 19px -8px rgba(78, 78, 78, 0.28);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 45px -15px, rgba(0, 0, 0, 0.05) 0px 4px 6px 3px;
 }
 .box-container .profile-container .user-profile-info .user-info .user-img {
   width: 120px;
@@ -1454,7 +1463,7 @@ button.ytp-button {
   justify-content: space-between;
   padding: 20px 25px;
   border-radius: 10px;
-  box-shadow: 1px 3px 19px -8px rgba(78, 78, 78, 0.28);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 45px -15px, rgba(0, 0, 0, 0.05) 0px 4px 6px 3px;
 }
 .box-container .profile-container .user-profile-info .about .about-me h3 {
   color: #636b74;
@@ -1491,7 +1500,7 @@ button.ytp-button {
 .box-container .profile-container .user-assets .assets {
   width: 100%;
   border-radius: 10px;
-  box-shadow: 1px 3px 19px -8px rgba(78, 78, 78, 0.28);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 45px -15px, rgba(0, 0, 0, 0.05) 0px 4px 6px 3px;
   padding: 30px;
   display: flex;
   align-items: center;
@@ -1593,7 +1602,7 @@ button.ytp-button {
   text-align: center;
   margin-bottom: 2rem;
   background: #F8F4D5;
-  border: #e9dd7e 2px solid;
+  border: rgb(233.4285714286, 221.1020408163, 125.5714285714) 2px solid;
 }
 .box-container .own-question p {
   color: #96722E;
@@ -1746,7 +1755,7 @@ button.ytp-button {
   .navbar-menu .main-menu .search-box .search-btn .fa-search {
     font-size: 15px;
   }
-  .navbar-menu .main-menu .search-input:not(:-moz-placeholder-shown) {
+  .navbar-menu .main-menu .search-input:not(:-moz-placeholder) {
     width: 100%;
     padding: 10px 10px;
   }
@@ -1759,7 +1768,7 @@ button.ytp-button {
     width: 100%;
     padding: 10px 10px;
   }
-  .navbar-menu .main-menu .search-input:not(:-moz-placeholder-shown) + .search-btn {
+  .navbar-menu .main-menu .search-input:not(:-moz-placeholder) + .search-btn {
     color: unset;
     background: unset;
   }
@@ -1928,6 +1937,13 @@ button.ytp-button {
   .box-container .filtered_questions-container .filtered_questions .question-owner .date-posted {
     font-size: 11px;
     color: #636b74;
+  }
+  .box-container .top-questions .no-data,
+  .box-container .filtered_questions-container .no-data {
+    width: 100%;
+    padding: 20px 0;
+    font-size: 14px;
+    margin-top: 15px;
   }
   .box-container .top-questions .connect .connector,
   .box-container .top-questions .connect .connector-second,
@@ -2613,7 +2629,7 @@ button.ytp-button {
     width: calc(100vw - 2.8rem);
     margin-left: 1.4rem;
     margin-bottom: 1rem;
-    border: #e9dd7e 1.5px solid;
+    border: rgb(233.4285714286, 221.1020408163, 125.5714285714) 1.5px solid;
   }
   .box-container .own-question p {
     font-size: 12px;
