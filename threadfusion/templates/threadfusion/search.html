@@ -37,7 +37,7 @@
             </div>
         {% endfor %}
 
-        {% if question_count > 0 %}
+        {% if page_obj.has_other_pages %}
             <div class="pagination">
                 <ul class="pages">
                     {% if page_obj.has_previous %}

@@ -30,7 +30,7 @@
             </div>
         {% endfor %}
 
-        
+        {% if page_obj.has_other_pages %}
         <div class="pagination">
             <ul class="pages">
                 {% if page_obj.has_previous %}
@@ -54,5 +54,6 @@
                 {% endif %}
             </ul>
         </div>
+        {% endif %}
     </div>
 {% endblock %}
