@@ -28,7 +28,7 @@
                 <li><a href="{% url 'contact' %}"><i class="fa-solid fa-square-phone" id="mobile-icon"></i>Contact</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket" id="mobile-icon"></i>Logout</a></li>
-                    {% if profile_img %}
+                    {% if profile_img and profile_img.profile_image %}
                         <li class="user-profile-tag">
                             <a href="{% url 'userprofile' user.id %}">
                                 <div class="image-box">

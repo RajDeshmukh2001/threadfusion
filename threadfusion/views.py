@@ -348,7 +348,7 @@ def unfollow(request):
     return HttpResponseRedirect(reverse('userprofile', kwargs={'id': user_id}))
 
 def updateprofile(request, id):
-    if not request.user.is_authenticated and request.user.id != id:
+    if not request.user.is_authenticated or request.user.id != id:
         return HttpResponseRedirect(reverse('index'))
     
     user = get_object_or_404(User, pk=id)
