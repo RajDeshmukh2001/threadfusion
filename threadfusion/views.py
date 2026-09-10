@@ -2,6 +2,7 @@ import re
 import json
 from django.db.models import Q
 from django.urls import reverse
+from django.utils import timezone
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.core.paginator import Paginator
@@ -11,8 +12,17 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404
 from .forms import AskQuestionForm, AnswerForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.http import require_GET
 
 from .models import User, Question, Answer, Comment, Profile, Follow, Like, Contact
+
+@require_GET
+def health_check(request):
+    return JsonResponse({
+        "status": "UP",
+        "service": "ThreadFusion",
+        "timestamp": timezone.now().isoformat(),
+    }, status=200)
 
 def index(request):
     all_questions = Question.objects.all().order_by('id').reverse()

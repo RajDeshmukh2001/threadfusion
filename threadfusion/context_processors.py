@@ -1,4 +1,4 @@
-from .models import Profile, Question
+from .models import Profile
 
 def profile_context_processor(request):
     profile = None
