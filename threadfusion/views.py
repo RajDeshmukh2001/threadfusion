@@ -12,11 +12,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404
 from .forms import AskQuestionForm, AnswerForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_http_methods
 
 from .models import User, Question, Answer, Comment, Profile, Follow, Like, Contact
 
-@require_GET
+@require_http_methods(["GET", "HEAD"])
 def health_check(request):
     return JsonResponse({
         "status": "UP",
